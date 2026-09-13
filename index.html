@@ -1,310 +1,896 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andres Huaman — Portfolio</title>
-    <!-- Fuentes editoriales de alta gama -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-dark: #0a0a0c;
-            --bg-card: #121216;
-            --accent-gold: #c5a059;
-            --accent-gold-light: #e6c887;
-            --text-primary: #f4f4f6;
-            --text-secondary: #a0a0aa;
-            --border-subtle: #22222a;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrés Huamán — Data & Vision</title>
+<meta name="description" content="Portfolio of Andrés Huamán — data science, machine learning, photography and visual art.">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            line-height: 1.8;
-            padding: 0;
-            overflow-x: hidden;
-        }
+<style>
 
-        /* Tipografía Editorial */
-        h1, h2, h3, .serif-text {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
+  /* ============================================================
+     TOKENS
+     ============================================================ */
+  :root{
+    --serif: 'Fraunces', serif;
+    --sans: 'Inter', sans-serif;
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
+    --radius: 2px;
+    --ease: cubic-bezier(.16,.84,.44,1);
+    --dur-s: .35s;
+    --dur-m: .7s;
+    --dur-l: 1.1s;
+  }
 
-        /* Navbar Editorial */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border-subtle);
-            margin-bottom: 5rem;
-        }
+  html[data-theme="dark"]{
+    --bg:        #0b0a08;
+    --bg-raised: #141210;
+    --bg-image:  #1a1712;
+    --ink:       #f1ece2;
+    --ink-soft:  #b6ac9a;
+    --ink-faint: #6f6858;
+    --gold:      #c9a45f;
+    --gold-soft: #8f7448;
+    --hair:      rgba(201,164,95,.22);
+    --hair-soft: rgba(241,236,226,.08);
+    --shadow:    rgba(0,0,0,.45);
+  }
 
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--accent-gold);
-            letter-spacing: 0.15em;
-        }
+  html[data-theme="light"]{
+    --bg:        #f7f4ee;
+    --bg-raised: #efe9dd;
+    --bg-image:  #e7e0d0;
+    --ink:       #1b1812;
+    --ink-soft:  #5c5344;
+    --ink-faint: #948a75;
+    --gold:      #9c7b3d;
+    --gold-soft: #b99a5e;
+    --hair:      rgba(156,123,61,.3);
+    --hair-soft: rgba(27,24,18,.1);
+    --shadow:    rgba(0,0,0,.12);
+  }
 
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: color 0.3s ease;
-        }
+  *{ box-sizing:border-box; margin:0; padding:0; }
 
-        .nav-links a:hover {
-            color: var(--accent-gold);
-        }
+  html{ scroll-behavior:smooth; }
 
-        /* Hero Section / Portada de Galería */
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin-bottom: 8rem;
-        }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.7;
+    font-size:16px;
+    transition:background var(--dur-m) var(--ease), color var(--dur-m) var(--ease);
+    overflow-x:hidden;
+  }
 
-        .hero-title {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-        }
+  ::selection{ background:var(--gold); color:var(--bg); }
 
-        .hero-title span {
-            color: var(--accent-gold);
-            font-style: italic;
-            font-family: 'Cinzel', serif;
-            display: block;
-        }
+  a{ color:inherit; text-decoration:none; }
 
-        .hero-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
-        }
+  img{ display:block; max-width:100%; }
 
-        .hero-image-container {
-            position: relative;
-            border: 1px solid var(--border-subtle);
-            padding: 1rem;
-            background-color: var(--bg-card);
-        }
+  .wrap{
+    max-width:1160px;
+    margin:0 auto;
+    padding-inline:clamp(1.5rem, 4vw, 3rem);
+  }
 
-        .hero-image-placeholder {
-            width: 100%;
-            height: 420px;
-            background: linear-gradient(180deg, rgba(197, 160, 89, 0.1) 0%, rgba(10, 10, 12, 0.8) 100%), #18181c;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
-            border: 1px solid rgba(197, 160, 89, 0.2);
-            object-fit: cover;
-        }
+  /* Focus visibility */
+  a:focus-visible, button:focus-visible{
+    outline:1px solid var(--gold);
+    outline-offset:4px;
+  }
 
-        /* Grid de Exposición / Colecciones */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 3rem;
-            border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 1rem;
-        }
+  h1,h2,h3,.disp{ font-family:var(--serif); font-weight:400; letter-spacing:.005em; }
 
-        .section-title {
-            font-size: 1.8rem;
-            color: var(--text-primary);
-        }
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+  }
 
-        .section-number {
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-        }
+  .hair{
+    height:1px;
+    width:100%;
+    background:var(--hair);
+    border:0;
+    transform-origin:left;
+    transform:scaleX(0);
+    transition:transform 1.1s var(--ease);
+  }
+  .hair.in-view{ transform:scaleX(1); }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 8rem;
-        }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  }
 
-        .artwork-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            padding: 1.5rem;
-            transition: all 0.4s ease;
-            position: relative;
-        }
+  /* ============================================================
+     PRELOADER
+     ============================================================ */
+  #preloader{
+    position:fixed; inset:0; z-index:999;
+    background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    flex-direction:column; gap:1rem;
+    transition:opacity .9s var(--ease), visibility .9s var(--ease);
+  }
+  #preloader.done{ opacity:0; visibility:hidden; }
+  #preloader .mark{
+    font-family:var(--serif);
+    font-size:1.1rem;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    opacity:0;
+    animation:markIn 1.1s var(--ease) .15s forwards;
+  }
+  #preloader .rule{
+    width:1px; height:0;
+    background:var(--gold);
+    animation:ruleGrow 1.3s var(--ease) .5s forwards;
+  }
+  @keyframes markIn{ to{ opacity:1; } }
+  @keyframes ruleGrow{ to{ height:34px; } }
 
-        .artwork-card:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-5px);
-        }
+  /* ============================================================
+     CUSTOM CURSOR (desktop, fine pointer only)
+     ============================================================ */
+  #cursor{
+    position:fixed; top:0; left:0; width:14px; height:14px;
+    border:1px solid var(--gold);
+    border-radius:50%;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    z-index:998;
+    transition:width .3s var(--ease), height .3s var(--ease), opacity .3s var(--ease), border-color .3s var(--ease);
+    opacity:0;
+  }
+  #cursor.active{ opacity:1; }
+  #cursor.grow{ width:42px; height:42px; background:var(--gold); opacity:.14; }
 
-        .artwork-meta {
-            font-size: 0.75rem;
-            color: var(--accent-gold);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
+  /* ============================================================
+     NAV
+     ============================================================ */
+  header.site{
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    padding:1.6rem 0;
+    background:transparent;
+    transition:background var(--dur-m) var(--ease), padding var(--dur-m) var(--ease), border-color var(--dur-m) var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  header.site.scrolled{
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    padding:1.1rem 0;
+    border-bottom:1px solid var(--hair-soft);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    font-family:var(--serif);
+    font-size:1.05rem;
+    letter-spacing:.08em;
+  }
+  .brand em{ font-style:italic; color:var(--gold); }
 
-        .artwork-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            color: var(--text-primary);
-        }
+  .nav-right{ display:flex; align-items:center; gap:2.4rem; }
 
-        .artwork-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 300;
-        }
+  .nav-links{ display:flex; gap:2.2rem; }
+  .nav-links a{
+    position:relative;
+    font-size:.78rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    padding-bottom:4px;
+  }
+  .nav-links a::after{
+    content:'';
+    position:absolute; left:0; bottom:0;
+    width:100%; height:1px;
+    background:var(--gold);
+    transform:scaleX(0);
+    transform-origin:right;
+    transition:transform .45s var(--ease);
+  }
+  .nav-links a:hover::after{ transform:scaleX(1); transform-origin:left; }
+  .nav-links a:hover{ color:var(--ink); }
 
-        /* Quote / Filosofía */
-        .curator-quote {
-            text-align: center;
-            padding: 6rem 2rem;
-            border-top: 1px solid var(--border-subtle);
-            border-bottom: 1px solid var(--border-subtle);
-            margin-bottom: 8rem;
-            background: linear-gradient(180deg, #0a0a0c 0%, #121216 50%, #0a0a0c 100%);
-        }
+  #themeToggle{
+    width:30px; height:30px;
+    border:1px solid var(--hair);
+    border-radius:50%;
+    background:none;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold);
+    transition:border-color .3s var(--ease), transform .5s var(--ease);
+  }
+  #themeToggle:hover{ border-color:var(--gold); transform:rotate(20deg); }
+  #themeToggle svg{ width:14px; height:14px; }
 
-        .curator-quote p {
-            font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
-            color: var(--accent-gold-light);
-            max-width: 800px;
-            margin: 0 auto 1.5rem auto;
-            line-height: 1.4;
-        }
+  .nav-burger{ display:none; }
 
-        .curator-quote span {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-        }
+  @media (max-width:760px){
+    .nav-links{ display:none; }
+    .nav-burger{
+      display:block; background:none; border:0; color:var(--ink); cursor:pointer;
+      font-family:var(--sans); font-size:.75rem; letter-spacing:.1em; text-transform:uppercase;
+    }
+  }
 
-        /* Footer */
-        footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 3rem;
-            border-top: 1px solid var(--border-subtle);
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-        }
+  /* ============================================================
+     REVEAL UTILITY (clip-path curtain reveal)
+     ============================================================ */
+  .reveal{
+    clip-path:inset(0 0 100% 0);
+    opacity:0;
+    transform:translateY(14px);
+    transition:clip-path 1s var(--ease), opacity .9s var(--ease), transform .9s var(--ease);
+  }
+  .reveal.in-view{
+    clip-path:inset(0 0 0% 0);
+    opacity:1;
+    transform:translateY(0);
+  }
+  .reveal-delay-1{ transition-delay:.1s; }
+  .reveal-delay-2{ transition-delay:.2s; }
+  .reveal-delay-3{ transition-delay:.32s; }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero {
-                grid-template-columns: 1fr;
-            }
-            .hero-title {
-                font-size: 2.5rem;
-            }
-        }
-    </style>
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    padding-top:6rem;
+    padding-bottom:3rem;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:clamp(2rem,5vw,5rem);
+    align-items:center;
+    width:100%;
+  }
+  .hero-eyebrow{ margin-bottom:1.4rem; }
+  .hero h1{
+    font-size:clamp(2.5rem, 5.4vw, 4.4rem);
+    line-height:1.05;
+    color:var(--ink);
+  }
+  .hero h1 .accent{
+    display:block;
+    font-style:italic;
+    color:var(--gold);
+    font-weight:300;
+  }
+  .hero-sub{
+    margin-top:1.6rem;
+    max-width:38ch;
+    color:var(--ink-soft);
+    font-size:1.02rem;
+    font-weight:300;
+  }
+  .hero-cta{
+    margin-top:2.6rem;
+    display:flex;
+    gap:2.4rem;
+    flex-wrap:wrap;
+  }
+  .link-underline{
+    position:relative;
+    font-size:.8rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    padding-bottom:6px;
+    border-bottom:1px solid var(--hair);
+    transition:border-color .35s var(--ease), color .35s var(--ease);
+  }
+  .link-underline:hover{ border-color:var(--gold); color:var(--gold); }
+
+  .hero-frame{
+    position:relative;
+    border:1px solid var(--hair);
+    padding:.7rem;
+    background:var(--bg-raised);
+  }
+  .hero-portrait{
+    aspect-ratio:4/5;
+    width:100%;
+    background:
+      radial-gradient(120% 90% at 20% 0%, color-mix(in srgb, var(--gold) 16%, transparent) 0%, transparent 55%),
+      repeating-linear-gradient(135deg, var(--bg-image), var(--bg-image) 22px, color-mix(in srgb, var(--bg-image) 92%, var(--gold)) 22px, color-mix(in srgb, var(--bg-image) 92%, var(--gold)) 23px);
+    display:flex;
+    align-items:flex-end;
+    padding:1.4rem;
+    overflow:hidden;
+  }
+  .hero-portrait span{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:.85rem;
+    color:var(--ink-faint);
+  }
+  .hero-caption{
+    display:flex;
+    justify-content:space-between;
+    padding:.9rem .3rem 0;
+    font-size:.7rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+
+  /* ============================================================
+     STATEMENT
+     ============================================================ */
+  .statement{
+    padding:7rem 0;
+    border-top:1px solid var(--hair-soft);
+  }
+  .statement p{
+    font-family:var(--serif);
+    font-size:clamp(1.4rem, 2.6vw, 2rem);
+    line-height:1.5;
+    max-width:22ch;
+    color:var(--ink);
+  }
+  .statement p em{ color:var(--gold); font-style:italic; }
+
+  /* ============================================================
+     SECTION HEADERS
+     ============================================================ */
+  .section{ padding:6rem 0; }
+  .section-head{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:1.6rem;
+    align-items:end;
+    margin-bottom:3.4rem;
+  }
+  .section-num{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1rem;
+    color:var(--gold);
+  }
+  .section-head h2{
+    font-size:clamp(1.9rem,3.2vw,2.6rem);
+  }
+  .section-desc{
+    grid-column:2;
+    color:var(--ink-soft);
+    max-width:52ch;
+    font-size:.95rem;
+  }
+
+  /* ============================================================
+     ANALYSIS — project cards
+     ============================================================ */
+  .work-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--hair-soft);
+    border:1px solid var(--hair-soft);
+  }
+  .work-card{
+    background:var(--bg);
+    padding:2.4rem 2rem;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+    transition:background var(--dur-m) var(--ease);
+  }
+  .work-card:hover{ background:var(--bg-raised); }
+  .work-tag{
+    font-size:.68rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+  }
+  .work-card h3{
+    font-size:1.25rem;
+    line-height:1.3;
+  }
+  .work-card p{
+    color:var(--ink-soft);
+    font-size:.9rem;
+    flex-grow:1;
+  }
+  .stack{
+    display:flex; flex-wrap:wrap; gap:.5rem;
+    margin-top:.4rem;
+  }
+  .stack span{
+    font-size:.68rem;
+    letter-spacing:.04em;
+    color:var(--ink-faint);
+    border:1px solid var(--hair);
+    padding:.25rem .55rem;
+  }
+  .work-card a.card-link{
+    margin-top:.6rem;
+    font-size:.75rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    width:fit-content;
+    border-bottom:1px solid transparent;
+    transition:border-color .3s var(--ease), color .3s var(--ease);
+  }
+  .work-card a.card-link:hover{ color:var(--gold); border-color:var(--gold); }
+
+  @media (max-width:900px){
+    .work-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ============================================================
+     VISION — gallery mosaic
+     ============================================================ */
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    grid-auto-rows:110px;
+    gap:1.1rem;
+  }
+  .gallery figure{
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--hair-soft);
+    cursor:pointer;
+  }
+  .g1{ grid-column:span 3; grid-row:span 4; }
+  .g2{ grid-column:span 3; grid-row:span 3; }
+  .g3{ grid-column:span 2; grid-row:span 3; }
+  .g4{ grid-column:span 2; grid-row:span 3; }
+  .g5{ grid-column:span 2; grid-row:span 3; }
+  .g6{ grid-column:span 4; grid-row:span 3; }
+
+  .gallery .surface{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(150deg, color-mix(in srgb, var(--gold) 14%, transparent), transparent 60%),
+      var(--bg-image);
+    display:flex;
+    align-items:flex-end;
+    padding:1.1rem;
+    transition:transform .8s var(--ease);
+  }
+  .gallery figure:hover .surface{ transform:scale(1.06); }
+  .gallery figcaption{
+    position:absolute; left:1.1rem; bottom:1rem; right:1.1rem;
+    font-size:.72rem;
+    letter-spacing:.05em;
+    color:var(--ink);
+    opacity:0;
+    transform:translateY(8px);
+    transition:opacity .4s var(--ease), transform .4s var(--ease);
+  }
+  .gallery figure::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(0deg, color-mix(in srgb, var(--bg) 85%, transparent) 0%, transparent 55%);
+    opacity:0;
+    transition:opacity .4s var(--ease);
+  }
+  .gallery figure:hover::after,
+  .gallery figure:hover figcaption{ opacity:1; transform:translateY(0); }
+  .gallery figure em{
+    position:absolute; top:1rem; left:1.1rem;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:.75rem;
+    color:var(--ink-faint);
+  }
+
+  @media (max-width:760px){
+    .gallery{ grid-template-columns:repeat(2,1fr); grid-auto-rows:150px; }
+    .g1,.g2,.g3,.g4,.g5,.g6{ grid-column:span 2; grid-row:span 2; }
+  }
+
+  /* ============================================================
+     READING
+     ============================================================ */
+  .reading-list{ border-top:1px solid var(--hair-soft); }
+  .reading-item{
+    display:grid;
+    grid-template-columns:6rem 1fr auto;
+    gap:1.6rem;
+    align-items:baseline;
+    padding:1.6rem 0;
+    border-bottom:1px solid var(--hair-soft);
+    transition:padding-left .35s var(--ease);
+  }
+  .reading-item:hover{ padding-left:.6rem; }
+  .reading-year{ color:var(--ink-faint); font-size:.85rem; }
+  .reading-title{ font-family:var(--serif); font-size:1.15rem; }
+  .reading-title span{ display:block; font-family:var(--sans); font-size:.82rem; color:var(--ink-soft); margin-top:.25rem; }
+  .reading-note{
+    color:var(--ink-faint);
+    font-size:.85rem;
+    text-align:right;
+    max-width:26ch;
+  }
+  @media (max-width:700px){
+    .reading-item{ grid-template-columns:1fr; gap:.4rem; }
+    .reading-note{ text-align:left; }
+  }
+
+  /* ============================================================
+     CONTACT / FOOTER
+     ============================================================ */
+  .contact{
+    padding:7rem 0 3rem;
+    border-top:1px solid var(--hair-soft);
+  }
+  .contact h2{
+    font-size:clamp(2rem,4.4vw,3.4rem);
+    max-width:16ch;
+  }
+  .contact-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:2rem;
+    margin-top:2.6rem;
+  }
+  .contact-links{ display:flex; gap:1.8rem; flex-wrap:wrap; }
+  .contact-links a{
+    font-size:.8rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--hair);
+    padding-bottom:3px;
+    transition:color .3s var(--ease), border-color .3s var(--ease);
+  }
+  .contact-links a:hover{ color:var(--gold); border-color:var(--gold); }
+
+  footer.legal{
+    margin-top:5rem;
+    padding-top:1.6rem;
+    border-top:1px solid var(--hair-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:.6rem;
+    font-size:.72rem;
+    letter-spacing:.04em;
+    color:var(--ink-faint);
+  }
+  footer.legal a{ color:var(--ink-faint); }
+  footer.legal a:hover{ color:var(--gold); }
+
+  @media (max-width:760px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-frame{ order:-1; }
+  }
+
+</style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Navegación Elegante -->
-        <nav>
-            <div class="logo">ANDRES HUAMAN</div>
-            <div class="nav-links">
-                <a href="#obras">Estrategia</a>
-                <a href="#galeria">Arte & Viajes</a>
-                <a href="#contacto">Contacto</a>
-            </div>
-        </nav>
+  <!-- ============================================================
+       PRELOADER — brief curtain, sets the "entering a gallery" tone
+       ============================================================ -->
+  <div id="preloader" aria-hidden="true">
+    <span class="mark">Andrés Huamán</span>
+    <span class="rule"></span>
+  </div>
 
-        <!-- Seccion Hero Estilo Revista / Museo -->
-        <header class="hero">
-            <div>
-                <h1 class="hero-title">Estrategia <span>& Arte Visual</span></h1>
-                <p class="hero-subtitle">Donde la precisión de la analítica de datos se encuentra con la profundidad de la composición visual, la fotografía y el diseño.</p>
-            </div>
-            <div class="hero-image-container">
-                <!-- Reemplazar el src con la ruta de tu foto personal -->
-                <div class="hero-image-placeholder">
-                    [ Fotografía de Retrato Principal ]
-                </div>
-            </div>
-        </header>
+  <div id="cursor" aria-hidden="true"></div>
 
-        <!-- Galería de Obras / Secciones -->
-        <section id="obras">
-            <div class="section-header">
-                <h2 class="section-title">Salas de Exhibición</h2>
-                <span class="section-number">01 — 03</span>
-            </div>
+  <!-- ============================================================
+       NAV
+       ============================================================ -->
+  <header class="site" id="siteHeader">
+    <div class="wrap">
+      <nav>
+        <a href="#top" class="brand">Andrés <em>Huamán</em></a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a href="#analysis">Analysis</a>
+            <a href="#vision">Vision</a>
+            <a href="#reading">Reading</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <button id="themeToggle" aria-label="Toggle light and dark theme">
+            <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 12.6A9 9 0 1 1 11.4 3 7 7 0 0 0 21 12.6Z"/></svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-            <div class="gallery-grid">
-                <article class="artwork-card">
-                    <div class="artwork-meta">Exhibición I — Data & Analytics</div>
-                    <h3>Estrategia e Inteligencia Artificial</h3>
-                    <p>Arquitectura de datos, optimización de modelos y soluciones estratégicas que transforman información compleja en decisiones con valor.</p>
-                </article>
+  <main id="top">
 
-                <article class="artwork-card">
-                    <div class="artwork-meta">Exhibición II — Fotografía de Viaje</div>
-                    <h3>Bitácora & Paisaje Urbano</h3>
-                    <p>Documentación visual de arquitectura, luz natural y estética urbana capturada en diversos rincones del mundo.</p>
-                </article>
-
-                <article class="artwork-card">
-                    <div class="artwork-meta">Exhibición III — Bellas Artes</div>
-                    <h3>Ilustración & Escultura</h3>
-                    <p>Exploración de técnicas analógicas: retratos a lápiz de grafito, paletas de acuarela y modelado tridimensional.</p>
-                </article>
-            </div>
-        </section>
-
-        <!-- Quote Destacado -->
-        <div class="curator-quote">
-            <p>"La simplicidad es la máxima sofisticación."</p>
-            <span>— Leonardo da Vinci</span>
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow hero-eyebrow reveal">Portfolio — Lima, Peru</p>
+          <h1 class="reveal reveal-delay-1">
+            Data by discipline.
+            <span class="accent">Art by instinct.</span>
+          </h1>
+          <p class="hero-sub reveal reveal-delay-2">
+            I'm a data science student who spends as much time reading a confusion matrix
+            as composing a photograph. This is a record of both halves — the models I build
+            and the images, paintings and pages I collect along the way.
+          </p>
+          <div class="hero-cta reveal reveal-delay-3">
+            <a href="#analysis" class="link-underline">Analytical work</a>
+            <a href="#vision" class="link-underline">Visual work</a>
+          </div>
         </div>
 
-        <!-- Pie de página -->
-        <footer id="contacto">
-            <p>© 2026 ANDRES HUAMAN — DAVIDREVER</p>
-            <p>LIMA, PERÚ — PUBLICADO VÍA GITHUB PAGES</p>
+        <div class="hero-frame reveal reveal-delay-2">
+          <!-- Reemplaza el div .hero-portrait por: <img src="tu-foto.jpg" alt="Andrés Huamán" style="width:100%;height:100%;object-fit:cover"> -->
+          <div class="hero-portrait">
+            <span>Portrait — add photograph</span>
+          </div>
+          <div class="hero-caption">
+            <span>Andrés Huamán</span>
+            <span>2026</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STATEMENT
+         ============================================================ -->
+    <section class="statement">
+      <div class="wrap">
+        <p class="reveal">Every dataset tells a story worth <em>seeing</em> clearly — every photograph holds a pattern worth <em>measuring</em> honestly.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         I. ANALYSIS — Data & AI
+         ============================================================ -->
+    <section class="section" id="analysis">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-num reveal">I.</span>
+          <h2 class="reveal">Analysis</h2>
+          <p class="section-desc reveal reveal-delay-1">Machine learning, predictive modeling and small interactive experiments built to understand systems by building them.</p>
+        </div>
+
+        <div class="work-grid reveal">
+          <article class="work-card">
+            <span class="work-tag">Machine Learning</span>
+            <h3>Cardiovascular Disease Risk Prediction</h3>
+            <p>A classifier comparison for early cardiovascular risk detection — benchmarking Logistic Regression, Random Forest and XGBoost across multiple resampling strategies, optimized for recall given the medical stakes of a false negative.</p>
+            <div class="stack">
+              <span>Python</span><span>scikit-learn</span><span>XGBoost</span>
+            </div>
+            <!-- Reemplaza # por el link a tu repositorio o notebook -->
+            <a href="#" class="card-link">View project</a>
+          </article>
+
+          <article class="work-card">
+            <span class="work-tag">Creative Coding</span>
+            <h3>Interactive Browser Games</h3>
+            <p>A small, growing collection of browser-based games and interactive experiments — a sandbox for interaction design, state logic and interface polish outside of academic work.</p>
+            <div class="stack">
+              <span>JavaScript</span><span>HTML5</span><span>CSS</span>
+            </div>
+            <a href="#" class="card-link">View project</a>
+          </article>
+
+          <article class="work-card">
+            <span class="work-tag">Archive</span>
+            <h3>Further work on GitHub</h3>
+            <p>Notebooks, models and experiments in progress — the full, unfiltered archive lives in the repository.</p>
+            <!-- Reemplaza # por tu perfil de GitHub -->
+            <a href="#" class="card-link">Visit repository</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         II. VISION — Art, photography, travel
+         ============================================================ -->
+    <section class="section" id="vision">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-num reveal">II.</span>
+          <h2 class="reveal">Vision</h2>
+          <p class="section-desc reveal reveal-delay-1">Photography, painting and drawing collected between places — the other half of how I pay attention.</p>
+        </div>
+
+        <!--
+          Cada <figure> es un marcador de posición.
+          Reemplaza el div .surface por: <img class="surface" src="tu-foto.jpg" alt="...">
+          y edita el texto dentro de <em> (categoría) y <figcaption> (pie de foto).
+        -->
+        <div class="gallery reveal">
+          <figure class="g1">
+            <div class="surface"></div>
+            <em>Photography</em>
+            <figcaption>Untitled, travel series — add caption</figcaption>
+          </figure>
+          <figure class="g2">
+            <div class="surface"></div>
+            <em>Painting</em>
+            <figcaption>Watercolor study — add caption</figcaption>
+          </figure>
+          <figure class="g3">
+            <div class="surface"></div>
+            <em>Drawing</em>
+            <figcaption>Graphite portrait — add caption</figcaption>
+          </figure>
+          <figure class="g4">
+            <div class="surface"></div>
+            <em>Travel</em>
+            <figcaption>City, year — add caption</figcaption>
+          </figure>
+          <figure class="g5">
+            <div class="surface"></div>
+            <em>Photography</em>
+            <figcaption>Untitled — add caption</figcaption>
+          </figure>
+          <figure class="g6">
+            <div class="surface"></div>
+            <em>Sculpture</em>
+            <figcaption>Study in form — add caption</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         III. READING — book reviews
+         ============================================================ -->
+    <section class="section" id="reading">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-num reveal">III.</span>
+          <h2 class="reveal">Reading</h2>
+          <p class="section-desc reveal reveal-delay-1">Short notes on books that changed how I think — updated as I go.</p>
+        </div>
+
+        <!-- Duplica un .reading-item por cada libro; edita año, título, autor y nota -->
+        <div class="reading-list reveal">
+          <div class="reading-item">
+            <span class="reading-year">2026</span>
+            <span class="reading-title">Book Title <span>Author Name</span></span>
+            <span class="reading-note">One line on why it stayed with me.</span>
+          </div>
+          <div class="reading-item">
+            <span class="reading-year">2025</span>
+            <span class="reading-title">Book Title <span>Author Name</span></span>
+            <span class="reading-note">One line on why it stayed with me.</span>
+          </div>
+          <div class="reading-item">
+            <span class="reading-year">2025</span>
+            <span class="reading-title">Book Title <span>Author Name</span></span>
+            <span class="reading-note">One line on why it stayed with me.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT
+         ============================================================ -->
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <h2 class="reveal">Let's talk about data, or about the last place you traveled to.</h2>
+        <div class="contact-row reveal reveal-delay-1">
+          <!-- Reemplaza los # por tu correo, LinkedIn, GitHub e Instagram -->
+          <div class="contact-links">
+            <a href="mailto:you@example.com">Email</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">GitHub</a>
+            <a href="#">Instagram</a>
+          </div>
+          <span class="eyebrow" style="color:var(--ink-faint)">Lima, Peru</span>
+        </div>
+
+        <footer class="legal">
+          <span>&copy; 2026 Andrés Huamán</span>
+          <a href="#top">Back to top</a>
         </footer>
-    </div>
+      </div>
+    </section>
+
+  </main>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Preloader ---------- */
+  window.addEventListener("load", function(){
+    var pre = document.getElementById("preloader");
+    setTimeout(function(){ pre.classList.add("done"); }, 900);
+  });
+
+  /* ---------- Sticky nav state ---------- */
+  var header = document.getElementById("siteHeader");
+  var onScroll = function(){
+    if (window.scrollY > 40) header.classList.add("scrolled");
+    else header.classList.remove("scrolled");
+  };
+  document.addEventListener("scroll", onScroll, { passive:true });
+  onScroll();
+
+  /* ---------- Scroll reveal (hairlines + .reveal blocks) ---------- */
+  var targets = document.querySelectorAll(".reveal, .hair");
+  if ("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add("in-view");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+    targets.forEach(function(t){ io.observe(t); });
+  } else {
+    targets.forEach(function(t){ t.classList.add("in-view"); });
+  }
+
+  /* ---------- Theme toggle ---------- */
+  var root = document.documentElement;
+  var toggle = document.getElementById("themeToggle");
+  var iconMoon = document.getElementById("iconMoon");
+
+  var stored = null;
+  try { stored = localStorage.getItem("theme"); } catch(e){}
+  if (stored) root.setAttribute("data-theme", stored);
+
+  function paintIcon(theme){
+    iconMoon.innerHTML = theme === "dark"
+      ? '<path d="M21 12.6A9 9 0 1 1 11.4 3 7 7 0 0 0 21 12.6Z"/>'
+      : '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/>';
+  }
+  paintIcon(root.getAttribute("data-theme"));
+
+  toggle.addEventListener("click", function(){
+    var current = root.getAttribute("data-theme");
+    var next = current === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    paintIcon(next);
+    try { localStorage.setItem("theme", next); } catch(e){}
+  });
+
+  /* ---------- Custom cursor (fine pointer devices only) ---------- */
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches){
+    var cursor = document.getElementById("cursor");
+    cursor.classList.add("active");
+    document.addEventListener("mousemove", function(e){
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
+    });
+    var growers = document.querySelectorAll("a, button, .work-card, .gallery figure");
+    growers.forEach(function(el){
+      el.addEventListener("mouseenter", function(){ cursor.classList.add("grow"); });
+      el.addEventListener("mouseleave", function(){ cursor.classList.remove("grow"); });
+    });
+  }
+
+})();
+</script>
 
 </body>
 </html>
