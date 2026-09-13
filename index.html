@@ -854,10 +854,15 @@
   try {
 
   /* ---------- Preloader ---------- */
-  window.addEventListener("load", function(){
+  var hidePreloader = function(){
     var pre = document.getElementById("preloader");
-    setTimeout(function(){ pre.classList.add("done"); }, 900);
-  });
+    setTimeout(function(){ pre.classList.add("done"); }, 300);
+  };
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", hidePreloader);
+  } else {
+    hidePreloader();
+  }
 
   /* ---------- Sticky nav state ---------- */
   var header = document.getElementById("siteHeader");
